@@ -1,0 +1,82 @@
+<html>
+   <head>
+    <title>Cisico</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCbpjKzAavnGEXr1mosNoVffDYvJKXdkYY"></script>
+	<link rel="stylesheet" href="css/main.css" />
+	<script src="js/index.js"></script>
+	</head>	
+	<body onload="initMap()">
+		<div id="header">
+		</div>
+		<div class="container-fluid">
+			<h1>Search Earthquake Catalog</h1>
+			<div id="search_bar">
+				From: <input type="date" id="startDate"/>
+				To: <input type="date" id="endDate"/>
+				<a href="#" type="button" class="btn btn-info btn-md" onclick="printtime()" id="search"><span class="glyphicon glyphicon-search"></span>Search</a>
+			</div>
+			<br/>
+			<div id="map"></div>
+			<div class="table-responsive">
+				<table id="historical_table" class="table table-condensed table-hover">
+					<thead>
+						<tr>
+							<th onclick="sortByDate()">Date
+							<span id="date_asc" class="glyphicon glyphicon-arrow-up"></span>
+							<span id="date_dsc" class="glyphicon glyphicon-arrow-down"></span></th>
+							<th>Location</th>
+							<th onclick="sortByMag()">Magnitude
+							<span id="mag_asc" class="glyphicon glyphicon-arrow-up"></span>
+							<span id="mag_dsc" class="glyphicon glyphicon-arrow-down"></span></th>
+						</tr>
+					</thead>
+				</table>
+				<div id="pagination">
+					<a href="javascript:prevPage()" id="prev">Prev</a>
+						page: <span id="page"></span>	
+					<a href="javascript:nextPage()" id="next">Next</a>
+				</div>
+			</div>
+			<div class="modal fade" id="Modal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Earthquake Detail</h4>
+						<div id="icon_detail">
+						<span id="sig">
+						<i class="fa fa-fire" id="fire"></i>
+						</span>
+						<span id="status">
+						<i class="material-icons" id="reviewed" title="have been looked at by a human">visibility_on</i>
+						<i class="material-icons" id="automatic" title="have not been verified or altered by a human">visibility_off</i>
+						</span>
+						</div>
+					</div>
+					<div class="modal-body" id="modalbody">
+						<div id="googleMap"></div>
+						<div id="more_detail">
+							<span id="type" title="Type of seismic event"></span>
+							<span id="location" title="description of named geographic region near to the event"></span>
+							<span id="depth" title="Depth of the event in kilometers"></span>
+							<a id="link" title="USGS Event Page for event" target="_blank"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div id="map_wrapper">
+				<div id="map_canvas" class="mapping"></div>
+			</div>
+		<div id="footer" class="container-fluid>
+		</div>
+   </body>
+</html>
